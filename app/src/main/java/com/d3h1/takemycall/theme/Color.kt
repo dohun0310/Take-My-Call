@@ -1,4 +1,4 @@
-package com.d3h1.takemycall.ui.theme
+package com.d3h1.takemycall.theme
 
 import androidx.compose.ui.graphics.Color
 

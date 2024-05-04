@@ -1,4 +1,4 @@
-package com.d3h1.takemycall.ui.theme
+package com.d3h1.takemycall.theme
 
 import android.app.Activity
 import android.os.Build
