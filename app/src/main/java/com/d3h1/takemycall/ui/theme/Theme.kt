@@ -12,25 +12,55 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = red10,
+    onPrimary = grey90,
+    primaryContainer = red30,
+    onPrimaryContainer = red90,
+
+    secondary = green10,
+    onSecondary = grey90,
+    secondaryContainer = green30,
+    onSecondaryContainer = green90,
+
+    tertiary = blue10,
+    onTertiary = grey90,
+    tertiaryContainer = blue30,
+    onTertiaryContainer = blue90,
+
+    background = grey10,
+    onBackground = grey90,
+
+    surface = grey20,
+    onSurface = grey90,
+
+    error = red90,
+    onError = red10
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = red90,
+    onPrimary = grey10,
+    primaryContainer = red60,
+    onPrimaryContainer = red10,
 
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    secondary = green90,
+    onSecondary = grey10,
+    secondaryContainer = green60,
+    onSecondaryContainer = green10,
+
+    tertiary = blue90,
+    onTertiary = grey10,
+    tertiaryContainer = blue60,
+    onTertiaryContainer = blue10,
+
+    background = grey90,
+    onBackground = grey10,
+
+    surface = grey80,
+    onSurface = grey10,
+
+    error = red10,
+    onError = red90
 )
 
 @Composable
