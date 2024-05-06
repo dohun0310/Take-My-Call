@@ -27,11 +27,11 @@ private val DarkColorScheme = darkColorScheme(
     tertiaryContainer = blue30,
     onTertiaryContainer = blue90,
 
-    background = grey10,
-    onBackground = grey90,
+    background = grey90,
+    onBackground = grey10,
 
-    surface = grey20,
-    onSurface = grey90,
+    surface = grey90,
+    onSurface = grey20,
 
     error = red90,
     onError = red10
@@ -53,11 +53,11 @@ private val LightColorScheme = lightColorScheme(
     tertiaryContainer = blue60,
     onTertiaryContainer = blue10,
 
-    background = grey90,
-    onBackground = grey10,
+    background = grey10,
+    onBackground = grey90,
 
-    surface = grey80,
-    onSurface = grey10,
+    surface = grey20,
+    onSurface = grey90,
 
     error = red10,
     onError = red90
