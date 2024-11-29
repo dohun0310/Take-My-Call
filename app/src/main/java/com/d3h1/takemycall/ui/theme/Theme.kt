@@ -11,56 +11,62 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
-private val DarkColorScheme = darkColorScheme(
-    primary = red10,
-    onPrimary = grey90,
-    primaryContainer = red30,
-    onPrimaryContainer = red90,
-
-    secondary = green10,
-    onSecondary = grey90,
-    secondaryContainer = green30,
-    onSecondaryContainer = green90,
-
-    tertiary = blue10,
-    onTertiary = grey90,
-    tertiaryContainer = blue30,
-    onTertiaryContainer = blue90,
-
-    background = grey90,
-    onBackground = grey10,
-
-    surface = grey90,
-    onSurface = grey20,
-
-    error = red90,
-    onError = red10
+private val LightColorScheme = lightColorScheme(
+    primary = LightPrimary,
+    onPrimary = LightOnPrimary,
+    primaryContainer = LightPrimaryContainer,
+    onPrimaryContainer = LightOnPrimaryContainer,
+    secondary = LightSecondary,
+    onSecondary = LightOnSecondary,
+    secondaryContainer = LightSecondaryContainer,
+    onSecondaryContainer = LightOnSecondaryContainer,
+    tertiary = LightTertiary,
+    onTertiary = LightOnTertiary,
+    tertiaryContainer = LightTertiaryContainer,
+    onTertiaryContainer = LightOnTertiaryContainer,
+    background = LightBackground,
+    onBackground = LightOnBackground,
+    surface = LightSurface,
+    onSurface = LightOnSurface,
+    surfaceVariant = LightSurfaceVariant,
+    onSurfaceVariant = LightOnSurfaceVariant,
+    error = LightError,
+    onError = LightOnError,
+    errorContainer = LightErrorContainer,
+    onErrorContainer = LightOnErrorContainer,
+    outline = LightOutline,
+    inverseSurface = LightInverseSurface,
+    inverseOnSurface = LightInverseOnSurface,
+    inversePrimary = LightInversePrimary
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = red90,
-    onPrimary = grey10,
-    primaryContainer = red60,
-    onPrimaryContainer = red10,
-
-    secondary = green90,
-    onSecondary = grey10,
-    secondaryContainer = green60,
-    onSecondaryContainer = green10,
-
-    tertiary = blue90,
-    onTertiary = grey10,
-    tertiaryContainer = blue60,
-    onTertiaryContainer = blue10,
-
-    background = grey10,
-    onBackground = grey90,
-
-    surface = grey20,
-    onSurface = grey90,
-
-    error = red10,
-    onError = red90
+private val DarkColorScheme = darkColorScheme(
+    primary = DarkPrimary,
+    onPrimary = DarkOnPrimary,
+    primaryContainer = DarkPrimaryContainer,
+    onPrimaryContainer = DarkOnPrimaryContainer,
+    secondary = DarkSecondary,
+    onSecondary = DarkOnSecondary,
+    secondaryContainer = DarkSecondaryContainer,
+    onSecondaryContainer = DarkOnSecondaryContainer,
+    tertiary = DarkTertiary,
+    onTertiary = DarkOnTertiary,
+    tertiaryContainer = DarkTertiaryContainer,
+    onTertiaryContainer = DarkOnTertiaryContainer,
+    background = DarkBackground,
+    onBackground = DarkOnBackground,
+    surface = DarkSurface,
+    onSurface = DarkOnSurface,
+    surfaceVariant = DarkSurfaceVariant,
+    onSurfaceVariant = DarkOnSurfaceVariant,
+    error = DarkError,
+    onError = DarkOnError,
+    errorContainer = DarkErrorContainer,
+    onErrorContainer = DarkOnErrorContainer,
+    outline = DarkOutline,
+    inverseSurface = DarkInverseSurface,
+    inverseOnSurface = DarkInverseOnSurface,
+    inversePrimary = DarkInversePrimary
 )
 
 @Composable
