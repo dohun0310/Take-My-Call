@@ -1,6 +1,7 @@
 package com.d3h1.takemycall.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -23,104 +24,150 @@ val Typography = Typography(
         fontSize = 34.sp,
         lineHeight = 41.sp,
         fontWeight = FontWeight.W400,
-        letterSpacing = (-0.4).sp
+        letterSpacing = (-0.4).sp,
+        platformStyle = PlatformTextStyle(
+            includeFontPadding = false
+        )
+
     ),
     displayMedium = TextStyle(
         fontFamily = notosanskr,
         fontSize = 28.sp,
         lineHeight = 34.sp,
         fontWeight = FontWeight.W400,
-        letterSpacing = (-0.4).sp
+        letterSpacing = (-0.4).sp,
+        platformStyle = PlatformTextStyle(
+            includeFontPadding = false
+        )
     ),
     displaySmall = TextStyle(
         fontFamily = notosanskr,
         fontSize = 24.sp,
         lineHeight = 30.sp,
         fontWeight = FontWeight.W400,
-        letterSpacing = (-0.4).sp
+        letterSpacing = (-0.4).sp,
+        platformStyle = PlatformTextStyle(
+            includeFontPadding = false
+        )
     ),
     headlineLarge = TextStyle(
         fontFamily = notosanskr,
         fontSize = 22.sp,
         lineHeight = 27.sp,
         fontWeight = FontWeight.W400,
-        letterSpacing = (-0.4).sp
+        letterSpacing = (-0.4).sp,
+        platformStyle = PlatformTextStyle(
+            includeFontPadding = false
+        )
     ),
     headlineMedium = TextStyle(
         fontFamily = notosanskr,
         fontSize = 18.sp,
         lineHeight = 23.sp,
         fontWeight = FontWeight.W600,
-        letterSpacing = (-0.4).sp
+        letterSpacing = (-0.4).sp,
+        platformStyle = PlatformTextStyle(
+            includeFontPadding = false
+        )
     ),
     headlineSmall = TextStyle(
         fontFamily = notosanskr,
         fontSize = 17.sp,
         lineHeight = 22.sp,
         fontWeight = FontWeight.W400,
-        letterSpacing = (-0.4).sp
+        letterSpacing = (-0.4).sp,
+        platformStyle = PlatformTextStyle(
+            includeFontPadding = false
+        )
     ),
     titleLarge = TextStyle(
         fontFamily = notosanskr,
         fontSize = 16.sp,
         lineHeight = 21.sp,
         fontWeight = FontWeight.W400,
-        letterSpacing = (-0.4).sp
+        letterSpacing = (-0.4).sp,
+        platformStyle = PlatformTextStyle(
+            includeFontPadding = false
+        )
     ),
     titleMedium = TextStyle(
         fontFamily = notosanskr,
         fontSize = 14.sp,
         lineHeight = 19.sp,
         fontWeight = FontWeight.W400,
-        letterSpacing = (-0.4).sp
+        letterSpacing = (-0.4).sp,
+        platformStyle = PlatformTextStyle(
+            includeFontPadding = false
+        )
     ),
     titleSmall = TextStyle(
         fontFamily = notosanskr,
         fontSize = 13.sp,
         lineHeight = 18.sp,
         fontWeight = FontWeight.W400,
-        letterSpacing = (-0.4).sp
+        letterSpacing = (-0.4).sp,
+        platformStyle = PlatformTextStyle(
+            includeFontPadding = false
+        )
     ),
     bodyLarge = TextStyle(
         fontFamily = notosanskr,
         fontSize = 12.sp,
         lineHeight = 16.sp,
         fontWeight = FontWeight.W400,
-        letterSpacing = (-0.4).sp
+        letterSpacing = (-0.4).sp,
+        platformStyle = PlatformTextStyle(
+            includeFontPadding = false
+        )
     ),
     bodyMedium = TextStyle(
         fontFamily = notosanskr,
         fontSize = 11.sp,
         lineHeight = 13.sp,
         fontWeight = FontWeight.W400,
-        letterSpacing = (-0.4).sp
+        letterSpacing = (-0.4).sp,
+        platformStyle = PlatformTextStyle(
+            includeFontPadding = false
+        )
     ),
     bodySmall = TextStyle(
         fontFamily = notosanskr,
         fontSize = 10.sp,
         lineHeight = 12.sp,
         fontWeight = FontWeight.W400,
-        letterSpacing = (-0.4).sp
+        letterSpacing = (-0.4).sp,
+        platformStyle = PlatformTextStyle(
+            includeFontPadding = false
+        )
     ),
     labelLarge = TextStyle(
         fontFamily = notosanskr,
         fontSize = 9.sp,
         lineHeight = 11.sp,
         fontWeight = FontWeight.W400,
-        letterSpacing = (-0.4).sp
+        letterSpacing = (-0.4).sp,
+        platformStyle = PlatformTextStyle(
+            includeFontPadding = false
+        )
     ),
     labelMedium = TextStyle(
         fontFamily = notosanskr,
         fontSize = 8.sp,
         lineHeight = 10.sp,
         fontWeight = FontWeight.W400,
-        letterSpacing = (-0.4).sp
+        letterSpacing = (-0.4).sp,
+        platformStyle = PlatformTextStyle(
+            includeFontPadding = false
+        )
     ),
     labelSmall = TextStyle(
         fontFamily = notosanskr,
         fontSize = 7.sp,
         lineHeight = 9.sp,
         fontWeight = FontWeight.W400,
-        letterSpacing = (-0.4).sp
+        letterSpacing = (-0.4).sp,
+        platformStyle = PlatformTextStyle(
+            includeFontPadding = false
+        )
     )
 )
