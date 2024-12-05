@@ -1,6 +1,11 @@
 package com.d3h1.takemycall
 
+import android.app.NotificationManager
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -8,22 +13,31 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.DialogProperties
+import androidx.core.content.ContextCompat.startActivity
 import com.d3h1.takemycall.ui.theme.TakeMyCallTheme
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
+import kotlin.system.exitProcess
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         enableEdgeToEdge()
         setContent {
             TakeMyCallTheme {
+                checkDndAccess(notificationManager, this)
                 MainScreen()
             }
         }
@@ -89,6 +103,70 @@ fun MainContent(paddingValues: PaddingValues) {
                 .background(MaterialTheme.colorScheme.outline)
         )
         TimerRow()
+    }
+}
+
+@Composable
+fun checkDndAccess(notificationManager: NotificationManager, context: Context): Boolean {
+    if (notificationManager.isNotificationPolicyAccessGranted) {
+        return true
+    } else {
+        PermissionDialog(context)
+    }
+    return false
+}
+
+@Composable
+fun PermissionDialog(context: Context) {
+    val openDialog = remember { mutableStateOf(true) }
+
+    if (openDialog.value) {
+        AlertDialog(
+            properties = DialogProperties(
+                usePlatformDefaultWidth = true
+            ),
+            title = {
+                Text(
+                    text ="권한 필요",
+                    style = MaterialTheme.typography.headlineSmall
+                )
+            },
+            text = {
+                Text(
+                    text = "방해 금지 모드를 해제하기 위해서 권한이 필요해요. 권한을 허용하시겠어요?",
+                    style = MaterialTheme.typography.headlineSmall
+                )
+            },
+            onDismissRequest = { openDialog.value = true },
+
+            dismissButton = {
+                Button(
+                    onClick = {
+                        exitProcess(0)
+                    }
+                ) {
+                    Text(
+                        text = "허용 안함",
+                        style = MaterialTheme.typography.headlineSmall
+                    )
+                }
+            },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        openDialog.value = false
+                        val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+                        startActivity(context, intent, null)
+
+                    }
+                ) {
+                    Text(
+                        text = "허용",
+                        style = MaterialTheme.typography.headlineSmall
+                    )
+                }
+            }
+        )
     }
 }
 
