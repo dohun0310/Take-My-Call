@@ -4,6 +4,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.media.AudioManager
 import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.ComponentActivity
@@ -33,20 +34,50 @@ import kotlin.system.exitProcess
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val audioManager: AudioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
         val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
         enableEdgeToEdge()
         setContent {
             TakeMyCallTheme {
-                checkDndAccess(notificationManager, this)
-                MainScreen()
+                val currentRingerMode = remember { mutableStateOf(getRingerMode(audioManager)) }
+                val currentDnd = remember { mutableStateOf(getDnd(notificationManager)) }
+
+                LaunchedEffect(Unit) {
+                    while (true) {
+                        currentRingerMode.value = getRingerMode(audioManager)
+                        currentDnd.value = getDnd(notificationManager)
+                        kotlinx.coroutines.delay(1000)
+                    }
+                }
+
+                checkDndAccess(notificationManager, this@MainActivity)
+                MainScreen(currentRingerMode.value, currentDnd.value)
             }
+        }
+    }
+
+    private fun getRingerMode(audioManager: AudioManager): String {
+        return when (audioManager.ringerMode) {
+            AudioManager.RINGER_MODE_NORMAL -> "소리"
+            AudioManager.RINGER_MODE_VIBRATE -> "진동"
+            else -> "무음"
+        }
+    }
+
+    private fun getDnd(notificationManager: NotificationManager): String {
+        return if (notificationManager.currentInterruptionFilter == NotificationManager.INTERRUPTION_FILTER_ALL) {
+            "꺼짐"
+        } else {
+            "켜짐"
         }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen() {
+fun MainScreen(currentRingerMode: String, currentDnd: String) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -79,13 +110,13 @@ fun MainScreen() {
                     SettingSection(
                         icon = ImageVector.vectorResource(id = R.drawable.rounded_sound_detection_loud_sound_24),
                         title = "오디오 설정",
-                        subtitle = "진동 모드",
+                        subtitle = "$currentRingerMode 모드",
                         modifier = Modifier.weight(1f)
                     )
                     SettingSection(
                         icon = ImageVector.vectorResource(id = R.drawable.rounded_do_not_disturb_on_total_silence_24),
                         title = "방해 금지 모드",
-                        subtitle = "꺼짐",
+                        subtitle = currentDnd,
                         modifier = Modifier.weight(1f)
                     )
                 }
@@ -242,6 +273,6 @@ fun TimerRow() {
 @Composable
 fun MainScreenPreview() {
     TakeMyCallTheme {
-        MainScreen()
+        MainScreen("소리", "켜짐")
     }
 }
