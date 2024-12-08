@@ -62,48 +62,43 @@ fun MainScreen() {
             )
         },
         content = { paddingValues ->
-            MainContent(paddingValues)
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.Start
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    SettingSection(
+                        icon = ImageVector.vectorResource(id = R.drawable.rounded_sound_detection_loud_sound_24),
+                        title = "오디오 설정",
+                        subtitle = "진동 모드",
+                        modifier = Modifier.weight(1f)
+                    )
+                    SettingSection(
+                        icon = ImageVector.vectorResource(id = R.drawable.rounded_do_not_disturb_on_total_silence_24),
+                        title = "방해 금지 모드",
+                        subtitle = "꺼짐",
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+                Spacer(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(0.5.dp)
+                        .background(MaterialTheme.colorScheme.outline)
+                )
+                TimerRow()
+            }
         }
     )
-}
-
-@Composable
-fun MainContent(paddingValues: PaddingValues) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(paddingValues),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.Start
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            SettingSection(
-                icon = ImageVector.vectorResource(id = R.drawable.rounded_sound_detection_loud_sound_24),
-                title = "오디오 설정",
-                subtitle = "진동 모드",
-                modifier = Modifier.weight(1f)
-            )
-            SettingSection(
-                icon = ImageVector.vectorResource(id = R.drawable.rounded_do_not_disturb_on_total_silence_24),
-                title = "방해 금지 모드",
-                subtitle = "꺼짐",
-                modifier = Modifier.weight(1f)
-            )
-        }
-        Spacer(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(0.5.dp)
-                .background(MaterialTheme.colorScheme.outline)
-        )
-        TimerRow()
-    }
 }
 
 @Composable
