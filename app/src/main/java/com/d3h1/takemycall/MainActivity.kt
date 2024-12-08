@@ -105,6 +105,10 @@ fun MainScreen() {
 fun checkDndAccess(notificationManager: NotificationManager, context: Context): Boolean {
     val openDialog = remember { mutableStateOf(true) }
 
+    if (notificationManager.isNotificationPolicyAccessGranted) {
+        openDialog.value = false
+    }
+
     if (openDialog.value) {
         AlertDialog(
             properties = DialogProperties(
@@ -156,11 +160,7 @@ fun checkDndAccess(notificationManager: NotificationManager, context: Context): 
         )
     }
 
-    if (!notificationManager.isNotificationPolicyAccessGranted) {
-        return false
-    } else {
-        return true
-    }
+    return notificationManager.isNotificationPolicyAccessGranted
 }
 
 @Composable
