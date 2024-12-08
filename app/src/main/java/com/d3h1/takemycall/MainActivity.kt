@@ -108,16 +108,6 @@ fun MainContent(paddingValues: PaddingValues) {
 
 @Composable
 fun checkDndAccess(notificationManager: NotificationManager, context: Context): Boolean {
-    if (notificationManager.isNotificationPolicyAccessGranted) {
-        return true
-    } else {
-        PermissionDialog(context)
-    }
-    return false
-}
-
-@Composable
-fun PermissionDialog(context: Context) {
     val openDialog = remember { mutableStateOf(true) }
 
     if (openDialog.value) {
@@ -154,10 +144,12 @@ fun PermissionDialog(context: Context) {
             confirmButton = {
                 Button(
                     onClick = {
-                        openDialog.value = false
-                        val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
-                        startActivity(context, intent, null)
-
+                        if (!notificationManager.isNotificationPolicyAccessGranted) {
+                            val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+                            startActivity(context, intent, null)
+                        } else {
+                            openDialog.value = false
+                        }
                     }
                 ) {
                     Text(
@@ -167,6 +159,12 @@ fun PermissionDialog(context: Context) {
                 }
             }
         )
+    }
+
+    if (!notificationManager.isNotificationPolicyAccessGranted) {
+        return false
+    } else {
+        return true
     }
 }
 
