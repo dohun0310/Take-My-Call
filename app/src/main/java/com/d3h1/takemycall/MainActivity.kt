@@ -43,6 +43,7 @@ class MainActivity : ComponentActivity() {
             TakeMyCallTheme {
                 val currentRingerMode = remember { mutableStateOf(getRingerMode(audioManager)) }
                 val currentDnd = remember { mutableStateOf(getDnd(notificationManager)) }
+                val currentDelay = remember { mutableStateOf(5) } // delay in seconds
 
                 LaunchedEffect(Unit) {
                     while (true) {
@@ -53,7 +54,13 @@ class MainActivity : ComponentActivity() {
                 }
 
                 checkDndAccess(notificationManager, this@MainActivity)
-                MainScreen(currentRingerMode.value, currentDnd.value)
+                MainScreen(
+                    currentRingerMode.value,
+                    currentDnd.value,
+                    currentDelay.value
+                ) { newDelay ->
+                    currentDelay.value = newDelay
+                }
             }
         }
     }
@@ -77,7 +84,12 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(currentRingerMode: String, currentDnd: String) {
+fun MainScreen(
+    currentRingerMode: String,
+    currentDnd: String,
+    currentDelay: Int,
+    onDelayChange: (Int) -> Unit
+) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -126,7 +138,7 @@ fun MainScreen(currentRingerMode: String, currentDnd: String) {
                         .height(0.5.dp)
                         .background(MaterialTheme.colorScheme.outline)
                 )
-                TimerRow()
+                TimerRow(currentDelay, onDelayChange)
             }
         }
     )
@@ -238,7 +250,12 @@ fun SettingRow(icon: ImageVector, text: String, textColor: Color, iconTint: Colo
 }
 
 @Composable
-fun TimerRow() {
+fun TimerRow(
+    currentDelay: Int,
+    onDelayChange: (Int) -> Unit
+) {
+    var openDialog by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -247,13 +264,12 @@ fun TimerRow() {
         horizontalAlignment = Alignment.End
     ) {
         Text(
-            text = "전화가 왔을 때, 사용자가 알아차리기 어려운 상태로 설정 되어 있다면, {}후 자동으로 전화를 받게돼요.",
+            text = "전화가 왔을 때, 사용자가 알아차리기 어려운 상태로 설정 되어 있다면, ${currentDelay}초 후 자동으로 전화를 받게돼요.",
             style = MaterialTheme.typography.headlineSmall.copy(color = MaterialTheme.colorScheme.onSurface)
         )
         Button(
-            onClick = { /*TODO*/ },
-            modifier = Modifier
-                .fillMaxWidth(),
+            onClick = { openDialog = true },
+            modifier = Modifier.fillMaxWidth(),
             contentPadding = PaddingValues(16.dp),
             shape = RoundedCornerShape(16.dp),
             colors = ButtonDefaults.buttonColors(
@@ -267,12 +283,35 @@ fun TimerRow() {
             )
         }
     }
+
+    if (openDialog) {
+        AlertDialog(
+            onDismissRequest = { openDialog = false },
+            title = { Text("지연 시간 선택") },
+            text = {
+                Column {
+                    listOf(5, 10, 15, 20, 30).forEach { time ->
+                        TextButton(
+                            onClick = {
+                                onDelayChange(time)
+                                openDialog = false
+                            },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text(text = "${time}초")
+                        }
+                    }
+                }
+            },
+            confirmButton = {}
+        )
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun MainScreenPreview() {
     TakeMyCallTheme {
-        MainScreen("소리", "켜짐")
+        MainScreen("소리", "켜짐", 5, {})
     }
 }
