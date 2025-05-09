@@ -61,6 +61,14 @@ class MainActivity : ComponentActivity() {
                 ) { newDelay ->
                     currentDelay.value = newDelay
                 }
+                // Automatically disable DND after the selected delay
+                LaunchedEffect(currentDnd.value, currentDelay.value) {
+                    // Only proceed if permission is granted and DND is currently on
+                    if (notificationManager.isNotificationPolicyAccessGranted && currentDnd.value == "켜짐") {
+                        kotlinx.coroutines.delay(currentDelay.value * 1000L)
+                        notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL)
+                    }
+                }
             }
         }
     }
